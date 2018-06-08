@@ -1,17 +1,16 @@
-#import
+#Import
 import RPi.GPIO as GPIO
 import socket
 
+#GPIO Variables
+x=11
+y=12
+
+#UPD Variables
 UDP_IP = "192.168.1.68"
 UDP_PORT = 60500
 
-#variables
-x=11
-y=12
-ay=0
-ax=0
-
-#setup
+#GPIO Setup
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(x,GPIO.OUT)
 GPIO.setup(y,GPIO.OUT)
@@ -33,6 +32,7 @@ def Y(ay):
 	a = (180-ay)/20.68
 	pwmy.ChangeDutyCycle(a)
 
+#Reveive Data
 while True:
     data,addr = sock.recvfrom(1024)
     val = float(data)
@@ -46,7 +46,6 @@ while True:
         angulo = float(data)
         Y(angulo)
 
-#event
 
 
 
